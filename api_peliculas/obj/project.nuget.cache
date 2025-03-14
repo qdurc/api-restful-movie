@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "BTs6CEIuep0=",
+  "dgSpecHash": "MjBOL4vGQi4=",
   "success": true,
   "projectFilePath": "/Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/api_peliculas.csproj",
   "expectedPackageFiles": [
     "/Users/eduardocolon/.nuget/packages/microsoft.aspnetcore.openapi/9.0.1/microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
-    "/Users/eduardocolon/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+    "/Users/eduardocolon/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
+    "/Users/eduardocolon/.nuget/packages/scalar.aspnetcore/2.0.33/scalar.aspnetcore.2.0.33.nupkg.sha512"
   ],
   "logs": []
 }
