@@ -10,8 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi(); // Configura la generación de OpenAPI
+
+// Configura la conexión a la base de datos
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Configura la conexión a la base de datos
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); 
 
 var app = builder.Build();
 
