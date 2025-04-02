@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "EKlwnFJgD1U=",
+  "dgSpecHash": "mt2jFkfaLxs=",
   "success": true,
   "projectFilePath": "/Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/api_peliculas.csproj",
   "expectedPackageFiles": [
+    "/Users/eduardocolon/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/Users/eduardocolon/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/eduardocolon/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
     "/Users/eduardocolon/.nuget/packages/dotnetenv/3.1.1/dotnetenv.3.1.1.nupkg.sha512",

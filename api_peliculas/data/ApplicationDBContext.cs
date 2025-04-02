@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-namespace api_pelicualas.Data;
+using api_peliculas.Models;
+namespace api_peliculas.Data;
 
 public class ApplicationDBContext : DbContext
 {
@@ -8,6 +9,6 @@ public class ApplicationDBContext : DbContext
     }
 
     // DbSet for the Categoría model
-    public DbSet<api_peliculas.Models.Categoría> Categorías { get; set; }
+    public DbSet<Categoría> Categoría { get; set; }
 
 }

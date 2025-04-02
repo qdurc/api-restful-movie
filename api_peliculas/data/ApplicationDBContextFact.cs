@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using DotNetEnv;
 
-namespace api_pelicualas.Data
+namespace api_peliculas.Data
 {
     public class ApplicationDBContextFactory : IDesignTimeDbContextFactory<ApplicationDBContext>
     {
