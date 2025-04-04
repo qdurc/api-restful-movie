@@ -12,8 +12,8 @@ using api_peliculas.Data;
 namespace api_peliculas.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250318181134_scndMigrate")]
-    partial class scndMigrate
+    [Migration("20250404182604_ActualizarModelo")]
+    partial class ActualizarModelo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace api_peliculas.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorías");
+                    b.ToTable("Categoría");
                 });
 #pragma warning restore 612, 618
         }

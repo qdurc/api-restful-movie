@@ -2,7 +2,7 @@ using AutoMapper;
 using api_peliculas.Models;
 using api_peliculas.Models.Dtos;
 
-namespace apli_peliculas.PeliculasMapper
+namespace api_peliculas.PeliculasMapper
 {
     public class PeliculasMappers : Profile
     {

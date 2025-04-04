@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using api_pelicualas.Data;
+using api_peliculas.Data;
 
 #nullable disable
 
@@ -39,7 +39,7 @@ namespace api_peliculas.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorías");
+                    b.ToTable("Categoría");
                 });
 #pragma warning restore 612, 618
         }
