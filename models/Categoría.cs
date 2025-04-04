@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 namespace api_peliculas.Models;
-
 public class Categoría
 {
     [Key]
@@ -10,3 +9,4 @@ public class Categoría
     [Required]
     public DateTime FechaCreación { get; set; }
 }
+
