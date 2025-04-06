@@ -5,7 +5,7 @@
 namespace api_peliculas.Migrations
 {
     /// <inheritdoc />
-    public partial class scndMigrate : Migration
+    public partial class AzureSQL : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

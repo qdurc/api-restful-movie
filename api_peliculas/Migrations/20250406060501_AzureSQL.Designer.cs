@@ -12,8 +12,8 @@ using api_peliculas.Data;
 namespace api_peliculas.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250404182604_ActualizarModelo")]
-    partial class ActualizarModelo
+    [Migration("20250406060501_AzureSQL")]
+    partial class AzureSQL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
