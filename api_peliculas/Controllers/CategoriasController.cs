@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using api_peliculas.Models.Dtos;
 using api_peliculas.Repos.IRepos;
 using AutoMapper;
+using api_peliculas.Models;
 
 namespace api_peliculas.Controllers
 {
@@ -46,6 +47,30 @@ namespace api_peliculas.Controllers
             }
             var categoriaDTO = _mapper.Map<CategoriaDto>(categoria);
             return Ok(categoriaDTO);
+        }
+        // POST: api/Categorias
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult<CrearCategoriaDto> CrearCategoria([FromBody] CrearCategoriaDto crearCategoriaDto)
+        {
+            if (crearCategoriaDto == null || !ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_repo.ExisteCategoria(crearCategoriaDto.Nombre))
+            {
+                ModelState.AddModelError("Nombre", "La categoria ya existe!");
+                return BadRequest(ModelState);
+            }
+            var categoria = _mapper.Map<Categoría>(crearCategoriaDto);
+            if (!_repo.CrearCategoria(categoria))
+            {
+                ModelState.AddModelError("", $"Algo salió mal al guardar el registro {categoria.Nombre}");
+                return StatusCode(500, ModelState);
+            }
+            return Ok(categoria);
         }
     }
 }
