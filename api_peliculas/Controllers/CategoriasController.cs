@@ -83,6 +83,7 @@ namespace api_peliculas.Controllers
         {
             if (categoriaDto == null || Id != categoriaDto.Id || !ModelState.IsValid)
             {
+                ModelState.AddModelError("Error", "Los datos enviados no son correctos!");
                 return BadRequest(ModelState);
             }
             var categoria = _mapper.Map<Categoría>(categoriaDto);
@@ -96,9 +97,31 @@ namespace api_peliculas.Controllers
                 ModelState.AddModelError("", $"Algo salió mal al actualizar el registro {categoria.Nombre}");
                 return StatusCode(500, ModelState);
             }
-            categoria.FechaCreación = DateTime.Now;
             return NoContent();
         }
-        
+        // DELETE: api/Categorias/{Id}
+        [HttpDelete("{Id:int}", Name = "EliminarCategoria")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public ActionResult DelCategoria(int Id)
+        {
+            if (Id == 0)
+            {
+                return BadRequest(ModelState);
+            }
+            var categoria = _repo.GetCategoria(Id);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            if (!_repo.EliminarCategoria(categoria))
+            {
+                ModelState.AddModelError("", $"Algo salió mal al eliminar el registro {categoria.Nombre}");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
     }
 }
