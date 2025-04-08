@@ -107,15 +107,13 @@ namespace api_peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult DelCategoria(int Id)
         {
-            if (Id == 0)
+            var existe = _repo.ExisteCategoria(Id);
+            if (!existe)
             {
+                ModelState.AddModelError("Error", "El ID de la categoria no existe!");
                 return BadRequest(ModelState);
             }
             var categoria = _repo.GetCategoria(Id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
             if (!_repo.EliminarCategoria(categoria))
             {
                 ModelState.AddModelError("", $"Algo salió mal al eliminar el registro {categoria.Nombre}");
