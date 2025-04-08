@@ -100,7 +100,7 @@ namespace api_peliculas.Controllers
             return NoContent();
         }
         // DELETE: api/Categorias/{Id}
-        [HttpDelete("{Id:int}", Name = "EliminarCategoria")]
+        [HttpDelete("{Id:int}", Name = "DelCategoria")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
