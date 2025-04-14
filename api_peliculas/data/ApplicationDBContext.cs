@@ -10,5 +10,6 @@ public class ApplicationDBContext : DbContext
 
     // DbSet for the Categoría model
     public DbSet<Categoría> Categoría { get; set; }
+    public DbSet<Pelicula> Pelicula { get; set; }
 
 }
