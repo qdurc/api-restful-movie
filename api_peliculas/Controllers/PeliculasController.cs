@@ -80,5 +80,39 @@ namespace api_peliculas.Controllers
             await _repo.ActualizarPelicula(peliculaDto);
             return NoContent();
         }
+        [HttpDelete("{id:int}", Name = "EliminarPelicula")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        // public async Task<ActionResult> EliminarPelicula(int id)
+        // {
+        //     if (id == 0)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+        //     var pelicula = await _repo.GetPelicula(id);
+        //     if (pelicula == null || pelicula.Id == 0)
+        //     {
+        //         return NotFound();
+        //     }
+        //     await _repo.EliminarPelicula(id);
+        //     return NoContent();
+        // }
+        public async Task<IActionResult> EliminarPelicula(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Id inválido.");
+            }
+
+            var fueEliminada = await _repo.EliminarPelicula(id);
+            if (!fueEliminada)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }

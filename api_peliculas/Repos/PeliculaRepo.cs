@@ -31,7 +31,6 @@ namespace api_peliculas.Repos
             return cambios > 0;
         }
 
-
         public async Task<PeliculaDto> CrearPelicula(CrearPeliculaDto crearPeliculaDto)
         {
             var pelicula = _mapper.Map<Pelicula>(crearPeliculaDto);
@@ -41,15 +40,17 @@ namespace api_peliculas.Repos
             return _mapper.Map<PeliculaDto>(pelicula);
         }
 
-        public Task<bool> EliminarPelicula(int id)
+        public async Task<bool> EliminarPelicula(int id)
         {
-            var pelicula = _db.Pelicula.FirstOrDefault(c => c.Id == id);
-            if (pelicula != null)
+            var pelicula = await _db.Pelicula.FirstOrDefaultAsync(c => c.Id == id);
+            if (pelicula == null)
             {
-                _db.Pelicula.Remove(pelicula);
-                return Task.FromResult(true);
+                return false;
             }
-            return Task.FromResult(false);
+
+            _db.Pelicula.Remove(pelicula);
+            var changes = await _db.SaveChangesAsync();
+            return changes > 0;
         }
 
         public Task<bool> ExistePelicula(string nombre)

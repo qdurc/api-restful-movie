@@ -14,7 +14,7 @@ namespace api_peliculas.PeliculasMapper
 
             //Peliculas
             CreateMap<Pelicula, CrearPeliculaDto>().ReverseMap();
-                    // Mapeo para actualizar película (PUT/PATCH) – se ignora FechaCreacion
+            // Mapeo para actualizar película (PATCH) – se ignora FechaCreacion
             CreateMap<Pelicula, PeliculaDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.FechaCreacion, opt => opt.Ignore());
