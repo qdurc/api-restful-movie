@@ -56,5 +56,29 @@ namespace api_peliculas.Controllers
             var pelicula = await _repo.CrearPelicula(crearPeliculaDto);
             return CreatedAtRoute("GetPelicula", new { id = pelicula.Id }, pelicula);
         }
+        [HttpPatch("{id:int}", Name = "ActualizarPelicula")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> ActualizarPelicula(int id, [FromBody] PeliculaDto peliculaDto)
+        {
+            if (peliculaDto == null || id != peliculaDto.Id)
+            {
+                return BadRequest(ModelState);
+            }
+            if (await _repo.ExistePelicula(peliculaDto.Nombre))
+            {
+                ModelState.AddModelError("Error", "La película ya existe");
+                return BadRequest(ModelState);
+            }
+            var pelicula = await _repo.GetPelicula(id);
+            if (pelicula == null || pelicula.Id == 0)
+            {
+                return NotFound();
+            }
+            await _repo.ActualizarPelicula(peliculaDto);
+            return NoContent();
+        }
     }
 }

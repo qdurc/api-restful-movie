@@ -2,5 +2,6 @@
     "dotnet.defaultSolution": "api_peliculas.sln",
     "dataworkspace.excludedProjects": [
         "moviesdb/moviesdb.sqlproj"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

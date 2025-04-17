@@ -21,12 +21,16 @@ namespace api_peliculas.Repos
 
         public async Task<bool> ActualizarPelicula(PeliculaDto peliculaDto)
         {
-            peliculaDto.FechaCreacion = DateTime.Now;
-            var pelicula = _mapper.Map<Pelicula>(peliculaDto);
-            _db.Pelicula.Update(pelicula);
-            var changes = await _db.SaveChangesAsync();
-            return changes > 0;
+            var peliculaExistente = await _db.Pelicula.FirstOrDefaultAsync(p => p.Id == peliculaDto.Id);
+            if (peliculaExistente == null)
+                return false;
+
+            _mapper.Map(peliculaDto, peliculaExistente); // actualiza los campos sobre la entidad ya rastreada
+
+            var cambios = await _db.SaveChangesAsync();
+            return cambios > 0;
         }
+
 
         public async Task<PeliculaDto> CrearPelicula(CrearPeliculaDto crearPeliculaDto)
         {
