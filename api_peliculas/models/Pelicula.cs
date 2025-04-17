@@ -13,9 +13,8 @@ public class Pelicula
     public enum Clasificacion { G, PG, PG13, R, NC17 }
     public Clasificacion ClasificacionPelicula { get; set; }
     public DateTime FechaCreacion { get; set; }
+    public int CategoriaId { get; set; }
     //FK con categoría
     [ForeignKey("Categoria")]
-    public int CategoriaId { get; set; }
     public Categoría Categoría { get; set; }
-
 }
