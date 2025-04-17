@@ -11,6 +11,5 @@ namespace api_peliculas.Repos.IRepos
         Task<bool> ExistePelicula(string nombre);
         Task<bool> ActualizarPelicula(PeliculaDto peliculaDto);
         Task<bool> EliminarPelicula(int id);
-        Task<bool> Guardar();
     }
 }

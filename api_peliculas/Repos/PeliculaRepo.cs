@@ -24,14 +24,17 @@ namespace api_peliculas.Repos
             peliculaDto.FechaCreacion = DateTime.Now;
             var pelicula = _mapper.Map<Pelicula>(peliculaDto);
             _db.Pelicula.Update(pelicula);
-            return await Guardar();
+            var changes = await _db.SaveChangesAsync();
+            return changes > 0;
         }
 
-        public Task<PeliculaDto> CrearPelicula(CrearPeliculaDto crearPeliculaDto)
+        public async Task<PeliculaDto> CrearPelicula(CrearPeliculaDto crearPeliculaDto)
         {
             var pelicula = _mapper.Map<Pelicula>(crearPeliculaDto);
+            pelicula.FechaCreacion = DateTime.Now;
             _db.Pelicula.Add(pelicula);
-            return Task.FromResult(_mapper.Map<PeliculaDto>(pelicula));
+            await _db.SaveChangesAsync();
+            return _mapper.Map<PeliculaDto>(pelicula);
         }
 
         public Task<bool> EliminarPelicula(int id)
@@ -51,6 +54,12 @@ namespace api_peliculas.Repos
             return Task.FromResult(existe);
         }
 
+        public Task<bool> ExisteClasificacion(Pelicula.Clasificacion clasificacion)
+        {
+            bool existe = _db.Pelicula.Any(p => p.ClasificacionPelicula == clasificacion);
+            return Task.FromResult(existe);
+        }
+
         public Task<PeliculaDto> GetPelicula(int id)
         {
             var pelicula = _db.Pelicula.FirstOrDefault(c => c.Id == id);
@@ -62,11 +71,6 @@ namespace api_peliculas.Repos
             var peliculas = await _db.Pelicula.OrderBy(c => c.Nombre).ToListAsync();
             return _mapper.Map<List<PeliculaDto>>(peliculas);
         }
-        public async Task<bool> Guardar()
-        {
-            return await _db.SaveChangesAsync() >= 0;
-        }
-
         public Task<bool> PeliculaExists(int id)
         {
             var existe = _db.Pelicula.Any(c => c.Id == id);
