@@ -44,9 +44,7 @@ namespace api_peliculas.Repos
         {
             var pelicula = await _db.Pelicula.FirstOrDefaultAsync(c => c.Id == id);
             if (pelicula == null)
-            {
                 return false;
-            }
 
             _db.Pelicula.Remove(pelicula);
             var changes = await _db.SaveChangesAsync();
@@ -80,6 +78,19 @@ namespace api_peliculas.Repos
         {
             var existe = _db.Pelicula.Any(c => c.Id == id);
             return Task.FromResult(existe);
+        }
+
+        public Task<List<PeliculaDto>> GetPeliculasEnCategoria(int idCategoria)
+        {
+            var peliculas = _db.Pelicula.Where(c => c.Id == idCategoria).ToList();
+            if (peliculas == null)
+            {
+                return Task.FromResult(new List<PeliculaDto>());
+            }
+            else
+            {
+                return Task.FromResult(_mapper.Map<List<PeliculaDto>>(peliculas));
+            }
         }
     }
 }
