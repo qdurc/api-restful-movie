@@ -113,5 +113,25 @@ namespace api_peliculas.Controllers
             }
             return Ok(peliculas);
         }
+        [HttpGet("Buscar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<PeliculaDto>>> GetPeliculaPorNombre(string nombre)
+        {
+            try
+            {
+                var peliculas = await _repo.GetPeliculaPorNombre(nombre);
+                if (peliculas == null || peliculas.Count == 0)
+                {
+                    return NotFound("No se encontraron películas con ese nombre.");
+                }
+                return Ok(peliculas);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error interno del servidor: {ex.Message}");
+            }
+        }
     }
 }

@@ -51,22 +51,16 @@ namespace api_peliculas.Repos
             return changes > 0;
         }
 
-        public Task<bool> ExistePelicula(string nombre)
+        public async Task<bool> ExistePelicula(string nombre)
         {
-            var existe = _db.Pelicula.Any(c => c.Nombre.ToLower() == nombre.ToLower());
-            return Task.FromResult(existe);
+            var existe = await _db.Pelicula.AnyAsync(c => c.Nombre.ToLower() == nombre.ToLower());
+            return existe;
         }
 
-        public Task<bool> ExisteClasificacion(Pelicula.Clasificacion clasificacion)
+        public async Task<PeliculaDto> GetPelicula(int id)
         {
-            bool existe = _db.Pelicula.Any(p => p.ClasificacionPelicula == clasificacion);
-            return Task.FromResult(existe);
-        }
-
-        public Task<PeliculaDto> GetPelicula(int id)
-        {
-            var pelicula = _db.Pelicula.FirstOrDefault(c => c.Id == id);
-            return Task.FromResult(_mapper.Map<PeliculaDto>(pelicula));
+            var pelicula = await _db.Pelicula.FirstOrDefaultAsync(c => c.Id == id);
+            return _mapper.Map<PeliculaDto>(pelicula);
         }
 
         public async Task<List<PeliculaDto>> GetPeliculas()
@@ -74,23 +68,31 @@ namespace api_peliculas.Repos
             var peliculas = await _db.Pelicula.OrderBy(c => c.Nombre).ToListAsync();
             return _mapper.Map<List<PeliculaDto>>(peliculas);
         }
-        public Task<bool> PeliculaExists(int id)
+        public async Task<bool> PeliculaExists(int id)
         {
-            var existe = _db.Pelicula.Any(c => c.Id == id);
-            return Task.FromResult(existe);
+            var existe = await _db.Pelicula.AnyAsync(c => c.Id == id);
+            return existe;
         }
 
-        public Task<List<PeliculaDto>> GetPeliculasEnCategoria(int idCategoria)
+        public async Task<List<PeliculaDto>> GetPeliculasEnCategoria(int idCategoria)
         {
-            var peliculas = _db.Pelicula.Where(c => c.CategoriaId == idCategoria).ToList();
-            if (peliculas == null)
+            var peliculas = await _db.Pelicula
+                .Where(c => c.CategoriaId == idCategoria)
+                .ToListAsync();
+
+            return _mapper.Map<List<PeliculaDto>>(peliculas);
+        }
+        public async Task<List<PeliculaDto>> GetPeliculaPorNombre(string nombre)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
             {
-                return Task.FromResult(new List<PeliculaDto>());
+                return [];
             }
-            else
-            {
-                return Task.FromResult(_mapper.Map<List<PeliculaDto>>(peliculas));
-            }
+            var peliculas = await _db.Pelicula
+                .Where(c => EF.Functions.Like(c.Nombre, $"%{nombre}%"))
+                .ToListAsync();
+
+            return _mapper.Map<List<PeliculaDto>>(peliculas);
         }
     }
 }
