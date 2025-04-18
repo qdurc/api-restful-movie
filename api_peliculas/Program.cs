@@ -24,6 +24,7 @@ builder.Services.AddOpenApi();
 
 // Agrega servicios de inyección de dependencias
 builder.Services.AddScoped<ICategoriaRepo, CategoriaRepo>();
+builder.Services.AddScoped<IPeliculaRepo, PeliculaRepo>();
 
 //Agrega servicios de AutoMapper
 builder.Services.AddAutoMapper(typeof(PeliculasMappers));
