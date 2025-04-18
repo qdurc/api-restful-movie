@@ -85,20 +85,6 @@ namespace api_peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        // public async Task<ActionResult> EliminarPelicula(int id)
-        // {
-        //     if (id == 0)
-        //     {
-        //         return BadRequest(ModelState);
-        //     }
-        //     var pelicula = await _repo.GetPelicula(id);
-        //     if (pelicula == null || pelicula.Id == 0)
-        //     {
-        //         return NotFound();
-        //     }
-        //     await _repo.EliminarPelicula(id);
-        //     return NoContent();
-        // }
         public async Task<IActionResult> EliminarPelicula(int id)
         {
             if (id <= 0)
@@ -113,6 +99,19 @@ namespace api_peliculas.Controllers
             }
 
             return NoContent();
+        }
+        [HttpGet("GetPeliculasEnCategoria/{idCategoria:int}", Name = "GetPeliculasEnCategoria")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<PeliculaDto>>> GetPeliculasEnCategoria(int idCategoria)
+        {
+            var peliculas = await _repo.GetPeliculasEnCategoria(idCategoria);
+            if (peliculas == null || peliculas.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(peliculas);
         }
     }
 }

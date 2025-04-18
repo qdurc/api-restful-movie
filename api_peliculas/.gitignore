@@ -1,2 +1,6 @@
 # Others
 .env
+
+#files
+obj/
+bin/
