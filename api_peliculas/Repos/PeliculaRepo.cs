@@ -25,7 +25,7 @@ namespace api_peliculas.Repos
             if (peliculaExistente == null)
                 return false;
 
-            _mapper.Map(peliculaDto, peliculaExistente); // actualiza los campos sobre la entidad ya rastreada
+            _mapper.Map(peliculaDto, peliculaExistente);
 
             var cambios = await _db.SaveChangesAsync();
             return cambios > 0;

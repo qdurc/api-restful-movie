@@ -115,22 +115,23 @@ namespace api_peliculas.Controllers
         }
         [HttpGet("Buscar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<List<PeliculaDto>>> GetPeliculaPorNombre(string nombre)
+        public async Task<ActionResult<List<PeliculaDto>>> GetPeliculaPorNombre([FromQuery] string nombre)
         {
+            if (string.IsNullOrWhiteSpace(nombre))
+                return BadRequest("El parámetro 'nombre' es requerido.");
             try
             {
                 var peliculas = await _repo.GetPeliculaPorNombre(nombre);
-                if (peliculas == null || peliculas.Count == 0)
-                {
-                    return NotFound("No se encontraron películas con ese nombre.");
-                }
-                return Ok(peliculas);
+                return peliculas.Any()
+                    ? Ok(peliculas)
+                    : NotFound("No se encontraron películas con ese nombre.");
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error interno del servidor: {ex.Message}");
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
             }
         }
     }
