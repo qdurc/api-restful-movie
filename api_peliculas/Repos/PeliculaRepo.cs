@@ -82,7 +82,7 @@ namespace api_peliculas.Repos
 
         public Task<List<PeliculaDto>> GetPeliculasEnCategoria(int idCategoria)
         {
-            var peliculas = _db.Pelicula.Where(c => c.Id == idCategoria).ToList();
+            var peliculas = _db.Pelicula.Where(c => c.CategoriaId == idCategoria).ToList();
             if (peliculas == null)
             {
                 return Task.FromResult(new List<PeliculaDto>());
