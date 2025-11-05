@@ -20,6 +20,7 @@ appsettings.Development.json
 
 # Visual Studio
 .vs/
+.env
 
 # Rider
 .idea/
@@ -27,7 +28,5 @@ appsettings.Development.json
 # macOS
 .DS_Store
 
-# Archivos de solución duplicados (si están en subcarpetas)
-**/api_peliculas.sln
 
 EOF
