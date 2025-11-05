@@ -1,2 +1,6 @@
-# Others
+# Ignorar variables de entorno
 .env
+
+# Ignorar archivos compilados
+bin/
+obj/

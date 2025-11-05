@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api_peliculas.Data;
 
@@ -11,9 +12,11 @@ using api_peliculas.Data;
 namespace api_peliculas.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250414155945_Creating Pelicula Schema")]
+    partial class CreatingPeliculaSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,10 +53,10 @@ namespace api_peliculas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Categoria")
+                    b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoriaId")
+                    b.Property<int?>("CategoríaId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClasificacionPelicula")
@@ -76,44 +79,16 @@ namespace api_peliculas.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Categoria");
+                    b.HasIndex("CategoríaId");
 
                     b.ToTable("Pelicula");
-                });
-
-            modelBuilder.Entity("api_peliculas.Models.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contrasena")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreUsuario")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("api_peliculas.Models.Pelicula", b =>
                 {
                     b.HasOne("api_peliculas.Models.Categoría", "Categoría")
                         .WithMany()
-                        .HasForeignKey("Categoria");
+                        .HasForeignKey("CategoríaId");
 
                     b.Navigation("Categoría");
                 });

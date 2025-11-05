@@ -8,7 +8,9 @@ public class ApplicationDBContext : DbContext
     {
     }
 
-    // DbSet for the Categoría model
+    // DbSet for models
     public DbSet<Categoría> Categoría { get; set; }
+    public DbSet<Pelicula> Pelicula { get; set; }
+    public DbSet<Usuario> Usuario { get; set; }
 
 }
