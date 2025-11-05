@@ -1,6 +1,33 @@
-# Ignorar variables de entorno
-.env
+cat >> .gitignore << 'EOF'
 
-# Ignorar archivos compilados
-bin/
-obj/
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Configuración de desarrollo (puede contener secrets)
+appsettings.Development.json
+
+# Archivos de usuario
+*.user
+*.suo
+
+# Carpetas de base de datos local
+**/moviesdb/
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# Visual Studio
+.vs/
+
+# Rider
+.idea/
+
+# macOS
+.DS_Store
+
+# Archivos de solución duplicados (si están en subcarpetas)
+**/api_peliculas.sln
+
+EOF
