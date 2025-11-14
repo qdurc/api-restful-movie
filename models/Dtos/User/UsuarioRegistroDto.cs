@@ -10,5 +10,6 @@ namespace api_peliculas.Models.Dtos
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El campo contraseña es obligatorio")]
         public string Contrasena { get; set; }
+        public string Role { get; set; }
     }
 }

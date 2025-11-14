@@ -168,3 +168,4 @@
 /Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/obj/Debug/net9.0/api_peliculas.pdb
 /Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/obj/Debug/net9.0/api_peliculas.genruntimeconfig.cache
 /Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/obj/Debug/net9.0/ref/api_peliculas.dll
+/Users/eduardocolon/Documents/GitHub/restfulApi/api-restful-movie/api_peliculas/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

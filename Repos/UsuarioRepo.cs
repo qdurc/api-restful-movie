@@ -8,6 +8,8 @@ namespace api_peliculas.Repos
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AutoMapper;
+    using System.Security.Cryptography;
+    using System.Text;
 
     public class UsuarioRepo : IUsuarioRepo
     {
@@ -54,9 +56,35 @@ namespace api_peliculas.Repos
             throw new NotImplementedException();
         }
 
-        public Task<UsuarioDatosDto> Registro(UsuarioRegistroDto usuarioRegistroDto)
+        public async Task<Usuario> Registro(UsuarioRegistroDto usuarioRegistroDto)
         {
-            throw new NotImplementedException();
+            var passwordEncr = obtenermd5(usuarioRegistroDto.Contrasena);
+
+            Usuario usuario = new Usuario()
+            {
+                NombreUsuario = usuarioRegistroDto.NombreUsuario,
+                Nombre = usuarioRegistroDto.Nombre,
+                Contrasena = passwordEncr,
+                Role = usuarioRegistroDto.Role
+            };
+            _db.Usuario.Add(usuario);
+            await _db.SaveChangesAsync();
+            usuario.Contrasena = passwordEncr;
+            return usuario;
+        }
+        public static string obtenermd5(string valor)
+        {
+            if (valor == null)
+                valor = string.Empty;
+            using var md5 = MD5.Create();
+            var inputBytes = Encoding.UTF8.GetBytes(valor);
+            var hashBytes = md5.ComputeHash(inputBytes);
+            var builder = new StringBuilder(hashBytes.Length * 2);
+            foreach (var b in hashBytes)
+            {
+                builder.Append(b.ToString("x2"));
+            }
+            return builder.ToString();
         }
     }
 }
