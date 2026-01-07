@@ -21,6 +21,8 @@ appsettings.Development.json
 # Visual Studio
 .vs/
 .env
+**/bin/
+**/obj/
 
 # Rider
 .idea/

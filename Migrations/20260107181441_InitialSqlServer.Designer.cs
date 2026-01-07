@@ -12,8 +12,8 @@ using api_peliculas.Data;
 namespace api_peliculas.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251105173541_ActualizarModeloUsuario")]
-    partial class ActualizarModeloUsuario
+    [Migration("20260107181441_InitialSqlServer")]
+    partial class InitialSqlServer
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

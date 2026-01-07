@@ -11,7 +11,6 @@ namespace api_peliculas.PeliculasMapper
             //Categorias
             CreateMap<Categoría, CategoriaDto>().ReverseMap();
             CreateMap<Categoría, CrearCategoriaDto>().ReverseMap();
-
             //Peliculas
             CreateMap<Pelicula, CrearPeliculaDto>().ReverseMap();
             // Mapeo para actualizar película (PATCH) – se ignora FechaCreacion
