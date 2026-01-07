@@ -1,8 +1,8 @@
 using Scalar.AspNetCore;
-using api_peliculas.Repos.IRepos;
-using api_peliculas.Repos;
-using api_peliculas.PeliculasMapper;
-using api_peliculas.Data;
+using api_peliculas.Application.Interfaces.Repositories;
+using api_peliculas.Infrastructure.Repositories;
+using api_peliculas.Application.Mappings;
+using api_peliculas.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 
